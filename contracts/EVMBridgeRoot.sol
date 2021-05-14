@@ -3,15 +3,12 @@ pragma solidity >=0.4.24 <=0.8.4;
 pragma experimental ABIEncoderV2;
 
 import "./interfaces/IEVMBridge.sol";
-
 import "./libraries/MultiSend.sol";
-
-import "hardhat/console.sol";
 
 import { BaseRootTunnel } from "@maticnetwork/pos-portal/contracts/tunnel/BaseRootTunnel.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-/// @title EVMBridge sender lives on the parent chain (eth mainnet) and sends messages to a child chain
+/// @title EVMBridgeRoot lives on the parent chain (e.g. eth mainnet) and sends messages to a child chain
 /// @notice 
 contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
 
@@ -26,7 +23,8 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
         bytes data;
     }
 
-
+    /// @notice Contract constructor
+    /// @param _owner Owner of this contract
     constructor(address _owner) public Ownable() {
         transferOwnership(_owner);
     }
@@ -57,9 +55,6 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
     /// @notice Function called as callback from child network
     /// @param message The message from the child chain
     function _processMessageFromChild(bytes memory message) internal override {
-        // MultiSend.multiSend(message);
-        // emit ReceivedMessageFromChild(message); 
-
         // no-op
     }
 

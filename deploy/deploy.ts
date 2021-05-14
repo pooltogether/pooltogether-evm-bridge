@@ -81,7 +81,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   const signer = ethers.provider.getSigner(deployer);
 
   dim('\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-  dim('PoolTogether GenericProxyFactory - Deploy Script');
+  dim('PoolTogether EVM Bridge Deploy Script');
   dim('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
 
   dim(`network: ${chainName(chainId)} (${isTestEnvironment ? 'local' : 'remote'})`);
@@ -93,11 +93,22 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
 
   dim(`deployer: ${admin}`);
 
-  cyan(`\nDeploying GenericProxyFactory...`);
-  const proxyFactoryResult = await deploy('GenericProxyFactory', {
+  cyan(`\nDeploying EVMBridgeRoot...`);
+  const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
     from: deployer,
+    args: [deployer]
   });
-  displayResult('GenericProxyFactory', proxyFactoryResult);
+  displayResult('EVMBridgeRoot', EVMBridgeRoot);
+
+
+  // attention -- deploy on seperate network
+
+  // cyan(`\nDeploying EVMBridgeChild...`);
+  // const EVMBridgeChild = await deploy('EVMBridgeChild', {
+  //   from: deployer
+  // });
+  // displayResult('EVMBridgeChild', EVMBridgeChild);
+
 };
 
 export default deployFunction;
