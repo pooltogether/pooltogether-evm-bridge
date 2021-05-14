@@ -27,7 +27,7 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
     }
 
 
-    constructor(address _owner) Ownable() public {
+    constructor(address _owner) public Ownable() {
         transferOwnership(_owner);
     }
 
