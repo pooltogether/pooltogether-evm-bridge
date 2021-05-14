@@ -71,7 +71,11 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments, getChainId, ethers } = hre;
   const { deploy } = deployments;
 
-  let { deployer, admin } = await getNamedAccounts();
+  let { deployer, admin, checkpointManager, childTunnel } = await getNamedAccounts();
+
+  if(!checkpointManager || !childTunnel ){
+    throw new Error("Must define checkpointManager and childTunnel addresses")
+  }
 
   const chainId = parseInt(await getChainId());
 
@@ -96,7 +100,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   cyan(`\nDeploying EVMBridgeRoot...`);
   const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
     from: deployer,
-    args: [deployer]
+    args: [deployer, childTunnel, checkpointManager]
   });
   displayResult('EVMBridgeRoot', EVMBridgeRoot);
 

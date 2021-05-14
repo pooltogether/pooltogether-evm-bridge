@@ -16,7 +16,7 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
     event SentMessagesToChild(Message[] data);
 
     // address public bridgeStrategy;
-    
+
     /// @notice Structure of a message to be sent to the child chain
     struct Message {
         uint8 callType;
@@ -27,9 +27,21 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
 
     /// @notice Contract constructor
     /// @param _owner Owner of this contract
-    constructor(address _owner) public Ownable() {
+    /// @param _childTunnel Address of the child tunnel
+    /// @param _checkpointManager Address of the checkpoint manager
+    constructor(address _owner, address _childTunnel, address _checkpointManager) public Ownable() BaseRootTunnel() {
+        // this.setCheckpointManager(_checkpointManager);
+        // this.setChildTunnel(_childTunnel);
         transferOwnership(_owner);
     }
+
+    // /// @notice Contract initializer
+    // /// @param _childTunnel Address of the child tunnel
+    // /// @param _checkpointManager Address of the checkpoint manager
+    // function intialize(address _childTunnel, address _checkpointManager) external onlyOwner {
+    //     setCheckpointManager(_checkpointManager);
+    //     setChildTunnel(_childTunnel);
+    // }
 
     /// @notice Structure of a message to be sent to the child chain
     /// @param messages Array of Message's that will be encoded and sent to the child chain

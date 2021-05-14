@@ -15,7 +15,7 @@ describe('EVM Bridge Sender', function() {
     beforeEach(async () => {
         [wallet, wallet2, wallet3, wallet4] = await hre.ethers.getSigners();
         const bridgeRootFactory = await ethers.getContractFactory("EVMBridgeRoot", wallet)
-        evmBridgeRoot = await bridgeRootFactory.deploy(wallet.address)
+        evmBridgeRoot = await bridgeRootFactory.deploy(wallet.address, wallet2.address, wallet3.address) // dummy for 
         
         const bridgeChildFactory = await ethers.getContractFactory("EVMBridgeChildHarness")
         evmBridgeChild= await bridgeChildFactory.deploy()
@@ -39,7 +39,7 @@ describe('EVM Bridge Sender', function() {
     })
 
 
-    it('Send basic Message to Child', async () => {
+    it('Send number Message to Child', async () => {
 
         const setNumberValue = 40
         // craft tx -- call testContract::setNumber()
@@ -102,7 +102,7 @@ describe('EVM Bridge Sender', function() {
         expect(testContractEvent.toString()).to.equal(setStringValue)
     })
 
-    it.only('Send multiple Messages to Child', async () => {
+    it('Send multiple Messages to Child', async () => {
 
         const setNumberValue = 40
         // craft tx -- call testContract::setNumber()
