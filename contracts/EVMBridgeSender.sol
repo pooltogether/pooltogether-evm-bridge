@@ -6,6 +6,8 @@ import "./interfaces/IEVMBridge.sol";
 
 import "./libraries/MultiSend.sol";
 
+import "hardhat/console.sol";
+
 import { BaseRootTunnel } from "@maticnetwork/pos-portal/contracts/tunnel/BaseRootTunnel.sol";
 
 /// @title EVMBridge sender lives on the parent chain (eth mainnet) and sends messages to a child chain
@@ -28,12 +30,14 @@ contract  EVMBridgeSender is BaseRootTunnel {
 
     /// @notice Structure of a message to be sent to the child chain
     /// @param messages Array of Message's that will be encoded and sent to the child chain
-    function execute(Message[] calldata messages) external returns (bool) {
+    function execute(Message[] calldata messages) external returns (bool) { // change to ownable timelock
         
+        console.log("execute called to ", messages[0].to);
+
         bytes memory encodedMessages;
         
         for(uint i =0; i < messages.length; i++){
-
+            console.log("encoding message ", i);
             bytes memory last = abi.encodePacked(
                     messages[i].callType,
                     messages[i].to,
@@ -45,7 +49,7 @@ contract  EVMBridgeSender is BaseRootTunnel {
             // bytes memory last = encodeMessage(messages[i]); // this does not work -- Unimplemented feature
             encodedMessages = abi.encodePacked(encodedMessages, last);    
         }
-        
+        console.log("calling _sendMessageToChild");
         _sendMessageToChild(encodedMessages);
 
         emit SentMessageToChild(messages);

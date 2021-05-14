@@ -11,7 +11,7 @@ import "./libraries/MultiSend.sol";
 contract EVMBridgeReceiver is BaseChildTunnel {
 
     /// @notice Emitted when a message is sent from the child chain
-    event ReceivedMessageFromChild(bytes data);
+    event ReceivedMessageFromRoot(bytes data);
 
     /// @notice Emitted when a message is sent to the child chain
     event SentMessageToParent(Message[] data);
@@ -29,7 +29,7 @@ contract EVMBridgeReceiver is BaseChildTunnel {
     /// @param message Sent from parent chain
     function _processMessageFromRoot(bytes memory message) internal override {
         MultiSend.multiSend(message);
-        emit ReceivedMessageFromChild(message);
+        emit ReceivedMessageFromRoot(message);
     }
 
     /// @notice Sends Messages to parent
