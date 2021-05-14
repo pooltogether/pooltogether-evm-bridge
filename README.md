@@ -15,11 +15,11 @@ Format a message call as the following struct:
         bytes data;
     }
 ```
-Where:
-callType: 0 if call, 1 if callDelegate
-address: destination address on Child chain
-value: value to be send on Child chain
-data: the encoded data encapsulating the call on the Child chain
+Where:\
+`callType`: 0 if call, 1 if callDelegate\
+`address`: destination address on Child chain\
+`value`: value to be send on Child chain\
+`data`: the encoded data encapsulating the call on the Child chain\
 
 
 Call ``
