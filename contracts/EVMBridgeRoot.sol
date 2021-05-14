@@ -15,6 +15,8 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
     /// @notice Emitted when a message is sent to the child chain
     event SentMessagesToChild(Message[] data);
 
+    // address public bridgeStrategy;
+    
     /// @notice Structure of a message to be sent to the child chain
     struct Message {
         uint8 callType;

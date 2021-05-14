@@ -39,7 +39,7 @@ describe('EVM Bridge Sender', function() {
     })
 
 
-    it('Send Message to Child', async () => {
+    it('Send basic Message to Child', async () => {
 
         const setNumberValue = 40
         // craft tx -- call testContract::setNumber()
@@ -68,5 +68,81 @@ describe('EVM Bridge Sender', function() {
         const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[0])).args.number
 
         expect(testContractEvent.toNumber()).to.equal(setNumberValue)
+    })
+
+    it('Send string Message to Child', async () => {
+
+        const setStringValue = "0xhello"
+        // craft tx -- call testContract::setNumber()
+        const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setString(string)"),[setStringValue])
+
+        // call setStateSync with deployed MockStateSync
+        await evmBridgeRoot.setStateSender(mockStateSync.address)
+
+            console.log("sending to root")
+        // send transaction from root to child
+        const tx = await evmBridgeRoot.execute([[
+            0, // callType
+            testContract.address,
+            0,
+            encodedTxData
+        ]])
+
+        // listen to Mock::stateSync and get event
+        const receipt = await ethers.provider.getTransactionReceipt(tx.hash)
+
+        const stateSenderEvent = (mockStateSync.interface.parseLog(receipt.logs[0])).args.message
+        
+        // forward event data to child contract
+        const childTx = await evmBridgeChild.processMessageFromRoot(stateSenderEvent)
+        const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
+
+        const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[0])).args._string
+
+        expect(testContractEvent.toString()).to.equal(setStringValue)
+    })
+
+    it.only('Send multiple Messages to Child', async () => {
+
+        const setNumberValue = 40
+        // craft tx -- call testContract::setNumber()
+        const encodedNumberTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[setNumberValue])
+
+        const setStringValue = "0xhello"
+        // craft tx -- call testContract::setNumber()
+        const encodedStringTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setString(string)"),[setStringValue])
+
+        // call setStateSync with deployed MockStateSync
+        await evmBridgeRoot.setStateSender(mockStateSync.address)
+
+        // send transaction from root to child
+        const tx = await evmBridgeRoot.execute([[
+                0, // callType
+                testContract.address,
+                0,
+                encodedNumberTxData
+            ],
+            [
+                0, // callType
+                testContract.address,
+                0,
+                encodedStringTxData
+            ]
+        ])
+
+        // listen to Mock::stateSync and get event
+        const txReceipt = await ethers.provider.getTransactionReceipt(tx.hash)
+        const stateSenderEvent = (mockStateSync.interface.parseLog(txReceipt.logs[0])).args.message
+        
+        // forward event data to child contract
+        const childTx = await evmBridgeChild.processMessageFromRoot(stateSenderEvent)
+        const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
+
+        const stringTestContractEvent = (testContract.interface.parseLog(childReceipt.logs[1])).args._string
+        expect(stringTestContractEvent.toString()).to.equal(setStringValue)
+
+
+        const numberTestContractEvent = (testContract.interface.parseLog(childReceipt.logs[0])).args.number
+        expect(numberTestContractEvent.toNumber()).to.equal(setNumberValue)
     })
 })
