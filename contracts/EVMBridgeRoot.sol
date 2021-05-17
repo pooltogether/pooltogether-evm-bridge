@@ -29,6 +29,9 @@ contract  EVMBridgeRoot is Ownable, BaseRootTunnel {
     /// @param _childTunnel Address of the child tunnel
     /// @param _checkpointManager Address of the checkpoint manager
     constructor(address _owner, address _childTunnel, ICheckpointManager _checkpointManager) public Ownable() BaseRootTunnel() {
+        require(_childTunnel != address(0), "EVMBridgeRoot::childTunnel cannot be zero address");
+        require(address(_checkpointManager) != address(0), "EVMBridgeRoot::checkpointManager cannot be zero address");
+
         checkpointManager = _checkpointManager;
         childTunnel = _childTunnel;
         transferOwnership(_owner);
