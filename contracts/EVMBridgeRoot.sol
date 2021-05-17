@@ -6,16 +6,15 @@ import "./interfaces/IEVMBridge.sol";
 import "./libraries/MultiSend.sol";
 
 import { BaseRootTunnel } from "@maticnetwork/pos-portal/contracts/tunnel/BaseRootTunnel.sol";
+import { ICheckpointManager } from "@maticnetwork/pos-portal/contracts/root/ICheckpointManager.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title EVMBridgeRoot lives on the parent chain (e.g. eth mainnet) and sends messages to a child chain
 /// @notice 
-contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
+contract  EVMBridgeRoot is Ownable, BaseRootTunnel {
 
     /// @notice Emitted when a message is sent to the child chain
     event SentMessagesToChild(Message[] data);
-
-    // address public bridgeStrategy;
 
     /// @notice Structure of a message to be sent to the child chain
     struct Message {
@@ -29,19 +28,11 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
     /// @param _owner Owner of this contract
     /// @param _childTunnel Address of the child tunnel
     /// @param _checkpointManager Address of the checkpoint manager
-    constructor(address _owner, address _childTunnel, address _checkpointManager) public Ownable() BaseRootTunnel() {
-        // this.setCheckpointManager(_checkpointManager);
-        // this.setChildTunnel(_childTunnel);
+    constructor(address _owner, address _childTunnel, ICheckpointManager _checkpointManager) public Ownable() BaseRootTunnel() {
+        checkpointManager = _checkpointManager;
+        childTunnel = _childTunnel;
         transferOwnership(_owner);
     }
-
-    // /// @notice Contract initializer
-    // /// @param _childTunnel Address of the child tunnel
-    // /// @param _checkpointManager Address of the checkpoint manager
-    // function intialize(address _childTunnel, address _checkpointManager) external onlyOwner {
-    //     setCheckpointManager(_checkpointManager);
-    //     setChildTunnel(_childTunnel);
-    // }
 
     /// @notice Structure of a message to be sent to the child chain
     /// @param messages Array of Message's that will be encoded and sent to the child chain
@@ -64,7 +55,6 @@ contract  EVMBridgeRoot is BaseRootTunnel, Ownable {
         emit SentMessagesToChild(messages);
         return true;
     }
-
 
     /// @notice Function called as callback from child network
     /// @param message The message from the child chain

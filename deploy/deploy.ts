@@ -73,12 +73,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
 
   let { deployer, admin, checkpointManager, childTunnel } = await getNamedAccounts();
 
-  if(!checkpointManager || !childTunnel ){
-    throw new Error("Must define checkpointManager and childTunnel addresses")
-  }
-
   const chainId = parseInt(await getChainId());
-
   // 31337 is unit testing, 1337 is for coverage
   const isTestEnvironment = chainId === 31337 || chainId === 1337;
 
@@ -97,22 +92,27 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
 
   dim(`deployer: ${admin}`);
 
-  cyan(`\nDeploying EVMBridgeRoot...`);
-  const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
-    from: deployer,
-    args: [deployer, childTunnel, checkpointManager]
-  });
-  displayResult('EVMBridgeRoot', EVMBridgeRoot);
+  // deploying EVMBridgeChild to mumbai or matic
+  if(chainId == 80001 || chainId == 137){
+    cyan(`\nDeploying EVMBridgeChild...`);
+    const EVMBridgeChild = await deploy('EVMBridgeChild', {
+      from: deployer
+    });
+    displayResult('EVMBridgeChild', EVMBridgeChild);
+  }
 
 
-  // attention -- deploy on seperate network
+  // to EVMBridgeRoot to goerli or mainnet
+  if(chainId == 5 || chainId == 1){
+    cyan(`\nDeploying EVMBridgeRoot...`);
+    const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
+      from: deployer,
+      args: [deployer, childTunnel, checkpointManager]
+    });
+    displayResult('EVMBridgeRoot', EVMBridgeRoot);
+  }
 
-  // cyan(`\nDeploying EVMBridgeChild...`);
-  // const EVMBridgeChild = await deploy('EVMBridgeChild', {
-  //   from: deployer
-  // });
-  // displayResult('EVMBridgeChild', EVMBridgeChild);
-
+  green("Done!")
 };
 
 export default deployFunction;

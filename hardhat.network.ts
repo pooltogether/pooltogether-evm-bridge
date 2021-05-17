@@ -60,6 +60,13 @@ if (mnemonic) {
     url: 'https://rpc-mumbai.maticvigil.com',
     accounts: {
       mnemonic,
+    },   
+  };
+  networks.goerli = {
+    chainId: 5,
+    url: `https://goerli.infura.io/v3/${infuraApiKey}`,
+    accounts: {
+      mnemonic,
     },
   };
 }
