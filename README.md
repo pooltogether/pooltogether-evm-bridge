@@ -21,8 +21,14 @@ Where:\
 `value`: value to be send on Child chain\
 `data`: the encoded data encapsulating the call on the Child chain\
 
+This encoded data can be encoded using ethers.js `encodeFunctionData()` such as: 
+```javascript
+const testContract : Contract = await ethers.getContractAt("TestContract", address)
+const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[setNumberValue])
+```
 
-Call ``
+
+ `execute(Messages[] messages)` can be called by the contract owner (PoolTogether governance) to execute arbitrary calls on the child chain. 
 
 # Installation
 Install the repo and dependencies by running:
@@ -32,8 +38,8 @@ Install the repo and dependencies by running:
 These contracts can be deployed to a network by running:
 `yarn deploy <networkName>`
 
-The EVMBridgeRoot contract should be deployed on the "parent" chain. 
-The EVMBridgeChild contract should be deployed on the "child" chain. 
+The EVMBridgeRoot contract should be deployed on the "parent" chain - `yarn deploy mainnet`
+The EVMBridgeChild contract should be deployed on the "child" chain - `yarn deploy matic`
 
 # Testing
 Run the unit tests locally with:
