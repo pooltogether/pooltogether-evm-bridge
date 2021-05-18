@@ -7,16 +7,18 @@ import "hardhat/console.sol";
 contract TestContract{
 
     uint256 number;
+    string interestingString;
 
     event NumberSet(uint256 number);
-
-    function balanceOf() external returns (uint256){
-        return 42;
-    }
-
+    event StringSet(string _string);
 
     function setNumber(uint256 _number) external {
         number = _number;
         emit NumberSet(_number);
+    }
+
+    function setString(string calldata _string) external {
+        interestingString = _string;
+        emit StringSet(_string);
     }
 }

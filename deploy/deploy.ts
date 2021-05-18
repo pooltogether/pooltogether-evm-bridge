@@ -71,17 +71,16 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments, getChainId, ethers } = hre;
   const { deploy } = deployments;
 
-  let { deployer, admin } = await getNamedAccounts();
+  let { deployer, admin, checkpointManager, childTunnel } = await getNamedAccounts();
 
   const chainId = parseInt(await getChainId());
-
   // 31337 is unit testing, 1337 is for coverage
   const isTestEnvironment = chainId === 31337 || chainId === 1337;
 
   const signer = ethers.provider.getSigner(deployer);
 
   dim('\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-  dim('PoolTogether GenericProxyFactory - Deploy Script');
+  dim('PoolTogether EVM Bridge Deploy Script');
   dim('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n');
 
   dim(`network: ${chainName(chainId)} (${isTestEnvironment ? 'local' : 'remote'})`);
@@ -93,11 +92,27 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
 
   dim(`deployer: ${admin}`);
 
-  cyan(`\nDeploying GenericProxyFactory...`);
-  const proxyFactoryResult = await deploy('GenericProxyFactory', {
-    from: deployer,
-  });
-  displayResult('GenericProxyFactory', proxyFactoryResult);
+  // deploying EVMBridgeChild to mumbai or matic
+  if(chainId == 80001 || chainId == 137){
+    cyan(`\nDeploying EVMBridgeChild...`);
+    const EVMBridgeChild = await deploy('EVMBridgeChild', {
+      from: deployer
+    });
+    displayResult('EVMBridgeChild', EVMBridgeChild);
+  }
+
+
+  // to EVMBridgeRoot to goerli or mainnet
+  if(chainId == 5 || chainId == 1){
+    cyan(`\nDeploying EVMBridgeRoot...`);
+    const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
+      from: deployer,
+      args: [deployer, childTunnel, checkpointManager]
+    });
+    displayResult('EVMBridgeRoot', EVMBridgeRoot);
+  }
+
+  green("Done!")
 };
 
 export default deployFunction;

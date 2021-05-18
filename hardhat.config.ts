@@ -36,6 +36,13 @@ const config: HardhatUserConfig = {
     deployer: {
       default: 0,
     },
+    childTunnel: {
+      5: "0x2BDb05351971f27bB2eBe599289D74f2EC93a00A"
+    },
+    checkpointManager: {
+      0: "0x86E4Dc95c7FBdBf52e33D563BbDB00823894C287",
+      5: "0x2890bA17EfE978480615e330ecB65333b880928e"
+    }
   },
   networks,
   solidity: {
