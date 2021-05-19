@@ -27,7 +27,7 @@ contract FxRoot is IFxStateSender {
     }
 
     function sendMessageToChild(address _receiver, bytes calldata _data) public override {
-        // bytes memory data = abi.encode(msg.sender, _receiver, _data);
+        bytes memory data = abi.encode(msg.sender, _receiver, _data);
         stateSender.syncState(fxChild, _data);
     }
 }

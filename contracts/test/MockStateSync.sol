@@ -12,6 +12,7 @@ contract MockStateSync{
     event SentState(bytes message);
 
     function syncState(address childTunnel, bytes calldata message) external{
+        
         emit SentState(message);
     }
 
