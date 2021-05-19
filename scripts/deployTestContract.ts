@@ -15,7 +15,7 @@ async function deployTestContract(){
     console.log(testContract)
 
 
-    console.log("deployed testContract at ", testContract.address) // 0xD0746516BE509b429bD0e4bc5E415499dD6ccf5A
+    console.log("deployed testContract at ", testContract.address) // 0x358a1EF6813D44f11a92968F6E47f5613004c33f
 
 
 }
@@ -26,31 +26,41 @@ async function sendTransactionViaBridge(){
     const {deployer} = await hre.getNamedAccounts() 
     console.log("deployer is ", deployer)
 
+    const evmBridgeRoot = "0x51471C324b5041BF53c7E5cAD7392f78c397E67b"
+
     const deployerSigner = await hre.ethers.provider.getSigner(deployer)
 
-    const testContract = await hre.ethers.getContractAt("TestContract","0x7eDB775c3F8cABB74086781420FD144ea162D7C2")
+    const testContract = await hre.ethers.getContractAt("TestContract","0x358a1EF6813D44f11a92968F6E47f5613004c33f") // address of testContract above
 
     const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[42])
 
-    // console.log("encodedTxData: ", encodedTxData)
+    console.log("encodedTxData: ", encodedTxData)
 
-    const evmBridgeRoot = await hre.ethers.getContractAt("EVMBridgeRoot", "0xd1797D46C3E825fce5215a0259D3426a5c49455C")
+    const evmBridgeRootContract = await hre.ethers.getContractAt("EVMBridgeRoot", evmBridgeRoot, deployerSigner)
 
-    // console.log(evmBridgeRoot.interface)
+    // console.log(evmBridgeRootContract.interface)
 
-    // const executeTxData = evmBridgeRoot.interface.encodeFunctionData(evmBridgeRoot.interface.getFunction("execute()"))
+    // const executeTxData = evmBridgeRootContract.interface.encodeFunctionData(evmBridgeRootContract.interface.getFunction("execute()"))
     // send transaction from root to child
-    const tx = await evmBridgeRoot.execute([[
-        0, // callType
-        testContract.address,
-        0,
-        encodedTxData
-    ]])
 
-    const receipt = await hre.ethers.provider.getTransactionReceipt(tx.hash)
+    // console.log("sending execute()")
 
-    console.log(receipt)
+    // const tx = await evmBridgeRootContract.execute([[
+    //     0, // callType
+    //     testContract.address,
+    //     0,
+    //     encodedTxData
+    // ]])
+    // console.log("sent execute tx")
 
+    // console.log("tx hash is ", tx.hash)
+
+    // const receipt = await hre.ethers.provider.getTransactionReceipt(tx.hash)
+
+    // console.log(receipt)
+
+
+    // now check NumberSet event has fired from TestContract
 
 }
 
