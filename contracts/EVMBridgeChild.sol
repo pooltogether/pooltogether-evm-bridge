@@ -24,10 +24,6 @@ contract EVMBridgeChild is FxBaseChildTunnel {
     /// @param sender Address of parent chain sender
     /// @param message Sent from parent chain
     function _processMessageFromRoot(uint256 stateId, address sender, bytes memory message) internal override {
-        // console.log("calling multisend with ", message);
-
-        
-
         MultiSend.multiSend(message);
         emit ReceivedMessagesFromRoot(message);
     }

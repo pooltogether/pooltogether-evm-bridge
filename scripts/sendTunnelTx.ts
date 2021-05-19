@@ -10,7 +10,7 @@ async function sendTransactionViaBridge(){
 
     const testContract = await hre.ethers.getContractAt("TestContract","0x358a1EF6813D44f11a92968F6E47f5613004c33f") // address of testContract above
 
-    const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[42])
+    const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[10])
 
     console.log("encodedTxData: ", encodedTxData)
 
