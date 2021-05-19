@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.24 <=0.8.4;
+pragma solidity 0.6.6;
 pragma experimental ABIEncoderV2;
 
 import "./interfaces/IEVMBridge.sol";

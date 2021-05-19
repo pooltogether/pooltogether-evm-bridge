@@ -47,16 +47,6 @@ const config: HardhatUserConfig = {
   networks,
   solidity: {
     compilers: [
-      {
-        version: '0.8.4',
-        settings: {
-          optimizer: {
-            enabled: optimizerEnabled,
-            runs: 200,
-          },
-          evmVersion: 'istanbul',
-        }
-      },
         {
           version: '0.6.6',
           settings: {

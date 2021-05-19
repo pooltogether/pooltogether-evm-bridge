@@ -1,6 +1,6 @@
 
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.24 <=0.8.4;
+pragma solidity 0.6.6;
 pragma experimental ABIEncoderV2;
 
 /// @title An interface to allow smart contracts to execute across a bridge between two EVMs.
