@@ -56,6 +56,16 @@ const config: HardhatUserConfig = {
             },
             evmVersion: 'istanbul',
           }
+        },
+        {
+          version: '0.7.3',
+          settings: {
+            optimizer: {
+              enabled: optimizerEnabled,
+              runs: 200,
+            },
+            evmVersion: 'istanbul',
+          }
         }
     ]
 

@@ -1,17 +1,19 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.6.6;
+pragma solidity >=0.4.24 <0.8.0;
 pragma experimental ABIEncoderV2;
 
-import "./interfaces/IEVMBridge.sol";
 import "./libraries/MultiSend.sol";
 
-import { BaseRootTunnel } from "@maticnetwork/pos-portal/contracts/tunnel/BaseRootTunnel.sol";
-import { ICheckpointManager } from "@maticnetwork/pos-portal/contracts/root/ICheckpointManager.sol";
+// import { BaseRootTunnel } from "@maticnetwork/pos-portal/contracts/tunnel/BaseRootTunnel.sol";
+
+import { FxBaseRootTunnel } from "./FxBaseRootTunnel.sol";
+
+// import { ICheckpointManager } from "@maticnetwork/pos-portal/contracts/root/ICheckpointManager.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title EVMBridgeRoot lives on the parent chain (e.g. eth mainnet) and sends messages to a child chain
 /// @notice 
-contract  EVMBridgeRoot is Ownable, BaseRootTunnel {
+contract  EVMBridgeRoot is Ownable, FxBaseRootTunnel {
 
     /// @notice Emitted when a message is sent to the child chain
     event SentMessagesToChild(Message[] data);
@@ -26,14 +28,12 @@ contract  EVMBridgeRoot is Ownable, BaseRootTunnel {
 
     /// @notice Contract constructor
     /// @param _owner Owner of this contract
-    /// @param _childTunnel Address of the child tunnel
     /// @param _checkpointManager Address of the checkpoint manager
-    constructor(address _owner, address _childTunnel, ICheckpointManager _checkpointManager) public Ownable() BaseRootTunnel() {
-        require(_childTunnel != address(0), "EVMBridgeRoot::childTunnel cannot be zero address");
-        require(address(_checkpointManager) != address(0), "EVMBridgeRoot::checkpointManager cannot be zero address");
-
-        checkpointManager = _checkpointManager;
-        childTunnel = _childTunnel;
+    /// @param _fxRoot Address of the fxRoot for the chain
+    constructor(address _owner, address _checkpointManager, address _fxRoot) public 
+        Ownable() 
+        FxBaseRootTunnel(_checkpointManager, _fxRoot) {
+        
         transferOwnership(_owner);
     }
 
