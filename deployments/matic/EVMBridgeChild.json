@@ -1,0 +1,198 @@
+{
+  "address": "0x6dd4df4569aEc3e40FfbEee09602A12A9Ac3C697",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_fxChild",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "message",
+          "type": "bytes"
+        }
+      ],
+      "name": "MessageSent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "stateId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "ReceivedMessagesFromRoot",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "fxChild",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "fxRootTunnel",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "stateId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "rootMessageSender",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "processMessageFromRoot",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_fxRootTunnel",
+          "type": "address"
+        }
+      ],
+      "name": "setFxRootTunnel",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xe786a8703885f8eeab9588cfe451de12756d659a5edb39e252f93b9576306364",
+  "receipt": {
+    "to": null,
+    "from": "0x3F0556bCA55Bdbb78A9316936067a47fd4C4C4f4",
+    "contractAddress": "0x6dd4df4569aEc3e40FfbEee09602A12A9Ac3C697",
+    "transactionIndex": 150,
+    "gasUsed": "361479",
+    "logsBloom": "0x00002000000000000000000000000000000000000020000000000000000000000000000000000000000000000000000000018000000000000000000000000000000004000000000000000000000000800000000000000000000100000000000000000000000000000000000000000000000000000000000080000000000000000000000000000004800000000000000000000000000000000000000000000000200000000000000000000000000000000000000000000000000000000000004000000000000000000001000000000000000000000000000000100000000000000000000000000000000000000000000000000000000000000000000000100000",
+    "blockHash": "0x2382e02b686ec3a13343f58e898ef92af3e17f3074f88572460c9ddcac232839",
+    "transactionHash": "0xe786a8703885f8eeab9588cfe451de12756d659a5edb39e252f93b9576306364",
+    "logs": [
+      {
+        "transactionIndex": 150,
+        "blockNumber": 14733913,
+        "transactionHash": "0xe786a8703885f8eeab9588cfe451de12756d659a5edb39e252f93b9576306364",
+        "address": "0x0000000000000000000000000000000000001010",
+        "topics": [
+          "0x4dfe1bbbcf077ddc3e01291eea2d5c70c2b422b415d95645b9adcfd678cb1d63",
+          "0x0000000000000000000000000000000000000000000000000000000000001010",
+          "0x0000000000000000000000003f0556bca55bdbb78a9316936067a47fd4c4c4f4",
+          "0x0000000000000000000000007b5000af8ab69fd59eb0d4f5762bff57c9c04385"
+        ],
+        "data": "0x000000000000000000000000000000000000000000000000000148c36363860000000000000000000000000000000000000000000000000088d163c2bda32e0d0000000000000000000000000000000000000000000005d3ff48da5a8353bd4e00000000000000000000000000000000000000000000000088d01aff5a3fa80d0000000000000000000000000000000000000000000005d3ff4a231de6b7434e",
+        "logIndex": 278,
+        "blockHash": "0x2382e02b686ec3a13343f58e898ef92af3e17f3074f88572460c9ddcac232839"
+      }
+    ],
+    "blockNumber": 14733913,
+    "cumulativeGasUsed": "16195590",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x8397259c983751DAf40400790063935a11afa28a"
+  ],
+  "solcInputHash": "4c7f9dc329f99e135f77e42cc4a40df8",
+  "metadata": "{\"compiler\":{\"version\":\"0.7.3+commit.9bfce1f6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fxChild\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"message\",\"type\":\"bytes\"}],\"name\":\"MessageSent\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"uint256\",\"name\":\"stateId\",\"type\":\"uint256\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"sender\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"ReceivedMessagesFromRoot\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"fxChild\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"fxRootTunnel\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"stateId\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"rootMessageSender\",\"type\":\"address\"},{\"internalType\":\"bytes\",\"name\":\"data\",\"type\":\"bytes\"}],\"name\":\"processMessageFromRoot\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_fxRootTunnel\",\"type\":\"address\"}],\"name\":\"setFxRootTunnel\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"title\":\"EVMBridgeChild lives on the child chain and executes messages sent from the parent chain\",\"version\":1},\"userdoc\":{\"events\":{\"ReceivedMessagesFromRoot(uint256,address,bytes)\":{\"notice\":\"Emitted when a message is sent from the child chain\"}},\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/EVMBridgeChild.sol\":\"EVMBridgeChild\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/EVMBridgeChild.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity 0.7.3;\\npragma experimental ABIEncoderV2;\\n\\nimport \\\"./libraries/MultiSend.sol\\\";\\nimport { FxBaseChildTunnel } from \\\"./vendor/FxBaseChildTunnel.sol\\\";\\n\\n/// @title EVMBridgeChild lives on the child chain and executes messages sent from the parent chain\\ncontract EVMBridgeChild is FxBaseChildTunnel {\\n\\n    constructor(address _fxChild) public FxBaseChildTunnel(_fxChild) {\\n\\n    }\\n\\n    /// @notice Emitted when a message is sent from the child chain\\n    event ReceivedMessagesFromRoot(uint256 indexed stateId, address indexed sender, bytes data);\\n\\n    /// @notice Receives messages from data tunnel and disperses them using MultiSend\\n    /// @param stateId State update Id\\n    /// @param sender Address of parent chain sender\\n    /// @param message Sent from parent chain\\n    function _processMessageFromRoot(uint256 stateId, address sender, bytes memory message) internal override {\\n        \\n        (, , bytes memory data) = abi.decode(message, (address, address, bytes));\\n        MultiSend.multiSend(data);\\n        emit ReceivedMessagesFromRoot(stateId, sender, data);\\n    }\\n\\n}\",\"keccak256\":\"0xf8c5bfb2e1f6c5fe6eeb3c4294a43a1857133479076ac75e4be7219ced52a8fb\",\"license\":\"MIT\"},\"contracts/libraries/MultiSend.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.7.3;\\n\\nlibrary MultiSend{\\n\\n    // credit: gnosis-safe devs\\n    /// @dev Sends multiple transactions and reverts all if one fails.\\n    /// @param transactions Encoded transactions. Each transaction is encoded as a packed bytes of\\n    ///                     operation as a uint8 with 0 for a call or 1 for a delegatecall (=> 1 byte),\\n    ///                     to as a address (=> 20 bytes),\\n    ///                     value as a uint256 (=> 32 bytes),\\n    ///                     data length as a uint256 (=> 32 bytes),\\n    ///                     data as bytes.\\n    ///                     see abi.encodePacked for more information on packed encoding\\n    /// @notice This method is payable as delegatecalls keep the msg.value from the previous call\\n    ///         If the calling method (e.g. execTransaction) received ETH this would revert otherwise\\n    function multiSend(bytes memory transactions) internal {\\n        // require(address(this) != multisendSingleton, \\\"MultiSend should only be called via delegatecall\\\"); // we commented this out to create a library\\n        // solhint-disable-next-line no-inline-assembly\\n        assembly {\\n            let length := mload(transactions)\\n            let i := 0x20\\n            for {\\n                // Pre block is not used in \\\"while mode\\\"\\n            } lt(i, length) {\\n                // Post block is not used in \\\"while mode\\\"\\n            } {\\n                // First byte of the data is the operation.\\n                // We shift by 248 bits (256 - 8 [operation byte]) it right since mload will always load 32 bytes (a word).\\n                // This will also zero out unused data.\\n                let operation := shr(0xf8, mload(add(transactions, i)))\\n                // We offset the load address by 1 byte (operation byte)\\n                // We shift it right by 96 bits (256 - 160 [20 address bytes]) to right-align the data and zero out unused data.\\n                let to := shr(0x60, mload(add(transactions, add(i, 0x01))))\\n                // We offset the load address by 21 byte (operation byte + 20 address bytes)\\n                let value := mload(add(transactions, add(i, 0x15)))\\n                // We offset the load address by 53 byte (operation byte + 20 address bytes + 32 value bytes)\\n                let dataLength := mload(add(transactions, add(i, 0x35)))\\n                // We offset the load address by 85 byte (operation byte + 20 address bytes + 32 value bytes + 32 data length bytes)\\n                let data := add(transactions, add(i, 0x55))\\n                let success := 0\\n                switch operation\\n                    case 0 {\\n                        success := call(gas(), to, value, data, dataLength, 0, 0)\\n                    }\\n                    case 1 {\\n                        success := delegatecall(gas(), to, data, dataLength, 0, 0)\\n                    }\\n                if eq(success, 0) {\\n                    revert(0, 0)\\n                }\\n                // Next entry starts at 85 byte + data length\\n                i := add(i, add(0x55, dataLength))\\n            }\\n        }\\n    }\\n}\",\"keccak256\":\"0x4b6c77fe0ba35b679fc1aaddc96b885be709783327fe908d1d22da6df216d3dd\",\"license\":\"MIT\"},\"contracts/vendor/FxBaseChildTunnel.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity 0.7.3;\\n\\n// IFxMessageProcessor represents interface to process message\\ninterface IFxMessageProcessor {\\n    function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) external;\\n}\\n\\n/**\\n* @notice Mock child tunnel contract to receive and send message from L2\\n*/\\nabstract contract FxBaseChildTunnel is IFxMessageProcessor{\\n    // MessageTunnel on L1 will get data from this event\\n    event MessageSent(bytes message);\\n\\n    // fx child\\n    address public fxChild;\\n\\n    // fx root tunnel\\n    address public fxRootTunnel;\\n\\n    constructor(address _fxChild) {\\n        fxChild = _fxChild;\\n    }\\n\\n    // Sender must be fxRootTunnel in case of ERC20 tunnel\\n    modifier validateSender(address sender) {\\n        require(sender == fxRootTunnel, \\\"FxBaseChildTunnel: INVALID_SENDER_FROM_ROOT\\\");\\n        _;\\n    }\\n\\n    // set fxRootTunnel if not set already\\n    function setFxRootTunnel(address _fxRootTunnel) public {\\n        require(fxRootTunnel == address(0x0), \\\"FxBaseChildTunnel: ROOT_TUNNEL_ALREADY_SET\\\");\\n        fxRootTunnel = _fxRootTunnel;\\n    }\\n\\n    function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) public override {\\n        require(msg.sender == fxChild, \\\"FxBaseChildTunnel: INVALID_SENDER\\\");\\n        _processMessageFromRoot(stateId, rootMessageSender, data);\\n    }\\n\\n    /**\\n     * @notice Emit message that can be received on Root Tunnel\\n     * @dev Call the internal function when need to emit message\\n     * @param message bytes message that will be sent to Root Tunnel\\n     * some message examples -\\n     *   abi.encode(tokenId);\\n     *   abi.encode(tokenId, tokenMetadata);\\n     *   abi.encode(messageType, messageData);\\n     */\\n    function _sendMessageToRoot(bytes memory message) internal {\\n        emit MessageSent(message);\\n    }\\n\\n    /**\\n     * @notice Process message received from Root Tunnel\\n     * @dev function needs to be implemented to handle message as per requirement\\n     * This is called by onStateReceive function.\\n     * Since it is called via a system call, any event will not be emitted during its execution.\\n     * @param stateId unique state id\\n     * @param sender root message sender\\n     * @param message bytes message that was sent from Root Tunnel\\n     */\\n    function _processMessageFromRoot(uint256 stateId, address sender, bytes memory message) virtual internal;\\n}\\n\",\"keccak256\":\"0xe5979921ad0dc886c146eb0543677dab382a3fe9fb375c0e19682bb221c23352\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506040516105b93803806105b983398101604081905261002f91610054565b600080546001600160a01b0319166001600160a01b0392909216919091179055610082565b600060208284031215610065578081fd5b81516001600160a01b038116811461007b578182fd5b9392505050565b610528806100916000396000f3fe608060405234801561001057600080fd5b506004361061004c5760003560e01c8063450d11f0146100515780637f1e9cb01461006f57806388837094146100775780639a7c4b711461008c575b600080fd5b61005961009f565b60405161006691906103dc565b60405180910390f35b6100596100ae565b61008a610085366004610275565b6100bd565b005b61008a61009a366004610358565b610111565b6000546001600160a01b031681565b6001546001600160a01b031681565b6001546001600160a01b0316156100ef5760405162461bcd60e51b81526004016100e690610464565b60405180910390fd5b600180546001600160a01b0319166001600160a01b0392909216919091179055565b6000546001600160a01b0316331461013b5760405162461bcd60e51b81526004016100e690610423565b61017c848484848080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201919091525061018292505050565b50505050565b6060818060200190518101906101989190610298565b925050506101a5816101ed565b826001600160a01b0316847f94c58dcc5fd388fface430009b3a29575b2b5e4b756109eeb1fc41af5a31524d836040516101df91906103f0565b60405180910390a350505050565b805160205b81811015610270578083015160f81c6001820184015160601c601583018501516035840186015160558501870160008560008114610237576001811461024757610252565b6000808585888a5af19150610252565b6000808585895af491505b508061025d57600080fd5b50508060550185019450505050506101f2565b505050565b600060208284031215610286578081fd5b8135610291816104da565b9392505050565b6000806000606084860312156102ac578182fd5b83516102b7816104da565b60208501519093506102c8816104da565b604085015190925067ffffffffffffffff808211156102e5578283fd5b818601915086601f8301126102f8578283fd5b81518181111561030457fe5b604051601f8201601f19168101602001838111828210171561032257fe5b604052818152838201602001891015610339578485fd5b61034a8260208301602087016104ae565b809450505050509250925092565b6000806000806060858703121561036d578081fd5b84359350602085013561037f816104da565b9250604085013567ffffffffffffffff8082111561039b578283fd5b818701915087601f8301126103ae578283fd5b8135818111156103bc578384fd5b8860208285010111156103cd578384fd5b95989497505060200194505050565b6001600160a01b0391909116815260200190565b600060208252825180602084015261040f8160408501602087016104ae565b601f01601f19169190910160400192915050565b60208082526021908201527f4678426173654368696c6454756e6e656c3a20494e56414c49445f53454e44456040820152602960f91b606082015260800190565b6020808252602a908201527f4678426173654368696c6454756e6e656c3a20524f4f545f54554e4e454c5f4160408201526913149150511657d4d15560b21b606082015260800190565b60005b838110156104c95781810151838201526020016104b1565b8381111561017c5750506000910152565b6001600160a01b03811681146104ef57600080fd5b5056fea26469706673582212209d51d97fd16cac3c5c71ddcf5c7e9751fb3b388584c661b53a54e310e69695a464736f6c63430007030033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b506004361061004c5760003560e01c8063450d11f0146100515780637f1e9cb01461006f57806388837094146100775780639a7c4b711461008c575b600080fd5b61005961009f565b60405161006691906103dc565b60405180910390f35b6100596100ae565b61008a610085366004610275565b6100bd565b005b61008a61009a366004610358565b610111565b6000546001600160a01b031681565b6001546001600160a01b031681565b6001546001600160a01b0316156100ef5760405162461bcd60e51b81526004016100e690610464565b60405180910390fd5b600180546001600160a01b0319166001600160a01b0392909216919091179055565b6000546001600160a01b0316331461013b5760405162461bcd60e51b81526004016100e690610423565b61017c848484848080601f01602080910402602001604051908101604052809392919081815260200183838082843760009201919091525061018292505050565b50505050565b6060818060200190518101906101989190610298565b925050506101a5816101ed565b826001600160a01b0316847f94c58dcc5fd388fface430009b3a29575b2b5e4b756109eeb1fc41af5a31524d836040516101df91906103f0565b60405180910390a350505050565b805160205b81811015610270578083015160f81c6001820184015160601c601583018501516035840186015160558501870160008560008114610237576001811461024757610252565b6000808585888a5af19150610252565b6000808585895af491505b508061025d57600080fd5b50508060550185019450505050506101f2565b505050565b600060208284031215610286578081fd5b8135610291816104da565b9392505050565b6000806000606084860312156102ac578182fd5b83516102b7816104da565b60208501519093506102c8816104da565b604085015190925067ffffffffffffffff808211156102e5578283fd5b818601915086601f8301126102f8578283fd5b81518181111561030457fe5b604051601f8201601f19168101602001838111828210171561032257fe5b604052818152838201602001891015610339578485fd5b61034a8260208301602087016104ae565b809450505050509250925092565b6000806000806060858703121561036d578081fd5b84359350602085013561037f816104da565b9250604085013567ffffffffffffffff8082111561039b578283fd5b818701915087601f8301126103ae578283fd5b8135818111156103bc578384fd5b8860208285010111156103cd578384fd5b95989497505060200194505050565b6001600160a01b0391909116815260200190565b600060208252825180602084015261040f8160408501602087016104ae565b601f01601f19169190910160400192915050565b60208082526021908201527f4678426173654368696c6454756e6e656c3a20494e56414c49445f53454e44456040820152602960f91b606082015260800190565b6020808252602a908201527f4678426173654368696c6454756e6e656c3a20524f4f545f54554e4e454c5f4160408201526913149150511657d4d15560b21b606082015260800190565b60005b838110156104c95781810151838201526020016104b1565b8381111561017c5750506000910152565b6001600160a01b03811681146104ef57600080fd5b5056fea26469706673582212209d51d97fd16cac3c5c71ddcf5c7e9751fb3b388584c661b53a54e310e69695a464736f6c63430007030033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "title": "EVMBridgeChild lives on the child chain and executes messages sent from the parent chain",
+    "version": 1
+  },
+  "userdoc": {
+    "events": {
+      "ReceivedMessagesFromRoot(uint256,address,bytes)": {
+        "notice": "Emitted when a message is sent from the child chain"
+      }
+    },
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 1587,
+        "contract": "contracts/EVMBridgeChild.sol:EVMBridgeChild",
+        "label": "fxChild",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 1589,
+        "contract": "contracts/EVMBridgeChild.sol:EVMBridgeChild",
+        "label": "fxRootTunnel",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}

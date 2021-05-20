@@ -1,0 +1,36 @@
+{
+  "language": "Solidity",
+  "sources": {
+    "contracts/test/TestContract.sol": {
+      "content": "// SPDX-License-Identifier: MIT\npragma solidity >=0.4.24 <0.8.0;\npragma experimental ABIEncoderV2;\n\n\n\ncontract TestContract{\n\n    uint256 number;\n    string interestingString;\n\n    event NumberSet(uint256 number);\n    event StringSet(string _string);\n\n    function setNumber(uint256 _number) external {\n        number = _number;\n        emit NumberSet(_number);\n    }\n\n    function setString(string calldata _string) external {\n        interestingString = _string;\n        emit StringSet(_string);\n    }\n}"
+    }
+  },
+  "settings": {
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "evmVersion": "istanbul",
+    "outputSelection": {
+      "*": {
+        "*": [
+          "abi",
+          "evm.bytecode",
+          "evm.deployedBytecode",
+          "evm.methodIdentifiers",
+          "metadata",
+          "devdoc",
+          "userdoc",
+          "storageLayout",
+          "evm.gasEstimates"
+        ],
+        "": [
+          "ast"
+        ]
+      }
+    },
+    "metadata": {
+      "useLiteralContent": true
+    }
+  }
+}

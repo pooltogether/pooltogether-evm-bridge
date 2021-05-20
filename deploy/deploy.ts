@@ -113,6 +113,8 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
     displayResult('EVMBridgeRoot', EVMBridgeRoot);
   }
 
+  // console.log("fxRoot ", fxRoot)
+
   green("Done!")
 };
 

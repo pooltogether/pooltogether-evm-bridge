@@ -40,11 +40,11 @@ const config: HardhatUserConfig = {
       5: "0x2BDb05351971f27bB2eBe599289D74f2EC93a00A"
     },
     checkpointManager: {
-      0: "0x86E4Dc95c7FBdBf52e33D563BbDB00823894C287",
+      1: "0x86E4Dc95c7FBdBf52e33D563BbDB00823894C287",
       5: "0x2890bA17EfE978480615e330ecB65333b880928e"
     },
     fxRoot :{
-      0: "0xfe5e5D361b2ad62c541bAb87C45a0B9B018389a2",
+      1: "0xfe5e5D361b2ad62c541bAb87C45a0B9B018389a2",
       5: "0x3d1d3E34f7fB6D26245E6640E1c50710eFFf15bA"
     },
     fxChild : {
