@@ -1,27 +1,5 @@
 import hre from "hardhat"
 
-
-
-async function deployTestContract(){
-    const {deployer} = await hre.getNamedAccounts() 
-    console.log("deployer is ", deployer)
-
-    const deployerSigner = await hre.ethers.provider.getSigner(deployer)
-    console.log("deployerSigner is ", deployerSigner)
-    // deploy test contract
-    const testContractFactory = await hre.ethers.getContractFactory("TestContract", deployerSigner)
-    const testContract =  await testContractFactory.deploy()
-
-    console.log(testContract)
-
-
-    console.log("deployed testContract at ", testContract.address) // 0x358a1EF6813D44f11a92968F6E47f5613004c33f
-
-
-}
-
-// deployTestContract()
-
 async function sendTransactionViaBridge(){
     const {deployer} = await hre.getNamedAccounts() 
     console.log("deployer is ", deployer)
@@ -32,7 +10,7 @@ async function sendTransactionViaBridge(){
 
     const testContract = await hre.ethers.getContractAt("TestContract","0x358a1EF6813D44f11a92968F6E47f5613004c33f") // address of testContract above
 
-    const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[42])
+    const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[10])
 
     console.log("encodedTxData: ", encodedTxData)
 

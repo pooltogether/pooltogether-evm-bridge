@@ -1,7 +1,9 @@
 # PoolTogether EVM Bridge
 [![Coverage Status](https://coveralls.io/repos/github/pooltogether/pooltogether-evm-bridge/badge.svg?branch=master)](https://coveralls.io/github/pooltogether/pooltogether-evm-bridge?branch=master)
 
-An ownable half-duplex bridge to send `Messages` from a Root Chain to a child Chain using Matic Networks [PoS Data Tunnel](https://docs.matic.network/docs/develop/l1-l2-communication/data-tunnel/). 
+An ownable half-duplex bridge to send `Messages` from a Root Chain to a Child Chain using Matic Networks [PoS State Sender Bridge](https://docs.matic.network/docs/develop/l1-l2-communication/state-transfer).
+
+The [FxPortal contracts](https://github.com/jdkanani/fx-portal) are used to integrate with this bridge. 
 
 
 # Usage

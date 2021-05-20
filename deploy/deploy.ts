@@ -71,7 +71,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   const { getNamedAccounts, deployments, getChainId, ethers } = hre;
   const { deploy } = deployments;
 
-  let { deployer, admin, checkpointManager, childTunnel } = await getNamedAccounts();
+  let { deployer, admin, checkpointManager, fxChild, fxRoot } = await getNamedAccounts();
 
   const chainId = parseInt(await getChainId());
   // 31337 is unit testing, 1337 is for coverage
@@ -96,7 +96,8 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   if(chainId == 80001 || chainId == 137){
     cyan(`\nDeploying EVMBridgeChild...`);
     const EVMBridgeChild = await deploy('EVMBridgeChild', {
-      from: deployer
+      from: deployer,
+      args: [fxChild]
     });
     displayResult('EVMBridgeChild', EVMBridgeChild);
   }
@@ -107,7 +108,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
     cyan(`\nDeploying EVMBridgeRoot...`);
     const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
       from: deployer,
-      args: [deployer, childTunnel, checkpointManager]
+      args: [deployer, checkpointManager, fxRoot]
     });
     displayResult('EVMBridgeRoot', EVMBridgeRoot);
   }

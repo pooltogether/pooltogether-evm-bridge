@@ -838,13 +838,6 @@
     "@ethersproject/properties" "^5.1.0"
     "@ethersproject/strings" "^5.1.0"
 
-"@maticnetwork/pos-portal@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@maticnetwork/pos-portal/-/pos-portal-1.5.2.tgz#23e5b99aafa51c945723dc0eb147445daac33ce8"
-  integrity sha512-2bWhfsKd9J69l+Q4aNs4FygCZQBu1vtWLLv9G6dX5HblN/GXE1fyCFr3mjZAknZX+p1Esgj/CPfvXTo2VOG4/g==
-  dependencies:
-    ganache-cli "^6.9.1"
-
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz#d4b3549a5db5de2683e0c1071ab4f140904bbf69"
@@ -4953,7 +4946,7 @@ functional-red-black-tree@^1.0.1, functional-red-black-tree@~1.0.1:
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
   integrity sha1-GwqzvVU7Kg1jmdKcDj6gslIHgyc=
 
-ganache-cli@^6.11.0, ganache-cli@^6.9.1:
+ganache-cli@^6.11.0:
   version "6.12.2"
   resolved "https://registry.yarnpkg.com/ganache-cli/-/ganache-cli-6.12.2.tgz#c0920f7db0d4ac062ffe2375cb004089806f627a"
   integrity sha512-bnmwnJDBDsOWBUP8E/BExWf85TsdDEFelQSzihSJm9VChVO1SHp94YXLP5BlA4j/OTxp0wR4R1Tje9OHOuAJVw==

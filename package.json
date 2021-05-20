@@ -22,7 +22,6 @@
     "test": "yarn clean && HIDE_DEPLOY_LOG=true OPTIMIZER_DISABLED=true hardhat test"
   },
   "dependencies": {
-    "@maticnetwork/pos-portal": "^1.5.2",
     "@openzeppelin/contracts": "^3.1.0"
   },
   "devDependencies": {
