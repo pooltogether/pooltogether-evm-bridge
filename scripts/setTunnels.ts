@@ -7,8 +7,8 @@ async function setChildTunnelFx(){
 
     const deployerSigner = await hre.ethers.provider.getSigner(deployer)
 
-    const child = "0xfc0962247f8b80BfB24159bb998D28857B0365D8" // address of contract on mumbai
-    const evmBridgeRootContract = await hre.ethers.getContractAt("EVMBridgeRoot", "0x51471C324b5041BF53c7E5cAD7392f78c397E67b")
+    const child = "0xc82BfB2DeD95e23EFb732567F469Ac67805F707F" // address of contract on mumbai
+    const evmBridgeRootContract = await hre.ethers.getContractAt("EVMBridgeRoot", "0x5103456094FDa3da79b7D436b13F72613827e3A5")
     await evmBridgeRootContract.setFxChildTunnel(child)
 
     console.log("done!")
@@ -24,8 +24,8 @@ async function setRootTunnelFx(){
     const deployerSigner = await hre.ethers.provider.getSigner(deployer)
 
    
-    const root = "0x51471C324b5041BF53c7E5cAD7392f78c397E67b"
-    const evmBridgeChildContract = await hre.ethers.getContractAt("EVMBridgeChild", "0xfc0962247f8b80BfB24159bb998D28857B0365D8")
+    const root = "0x5103456094FDa3da79b7D436b13F72613827e3A5"
+    const evmBridgeChildContract = await hre.ethers.getContractAt("EVMBridgeChild", "0xc82BfB2DeD95e23EFb732567F469Ac67805F707F")
     await evmBridgeChildContract.setFxRootTunnel(root)
 
     console.log("done!")
