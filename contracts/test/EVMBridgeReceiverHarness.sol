@@ -13,5 +13,4 @@ contract EVMBridgeChildHarness is EVMBridgeChild {
     function processMessageFromRootHarness(uint256 stateId, address sender, bytes memory message) external{
         _processMessageFromRoot(stateId, sender, message);
     } 
-
 }

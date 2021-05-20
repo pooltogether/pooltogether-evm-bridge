@@ -1,13 +1,8 @@
 const { expect } = require('chai')
 const hre = require('hardhat')
-const toWei = ethers.utils.parseEther
-
-
 
 describe('EVM Bridge Sender', function() {
-    const overrides = { gasLimit: 9500000 }
-
-
+    
     let wallet, wallet2, wallet3, wallet4
 
     let evmBridgeRoot, evmBridgeChild, testContract, mockStateSync, fxRoot
@@ -30,9 +25,6 @@ describe('EVM Bridge Sender', function() {
 
         const testContractFactory = await ethers.getContractFactory("TestContract")
         testContract = await testContractFactory.deploy()
-
-
-
     })
 
     it('Non-owner cannot send message', async () => {
@@ -64,10 +56,8 @@ describe('EVM Bridge Sender', function() {
         
         const stateSenderEvent = (mockStateSync.interface.parseLog(receipt.logs[0])).args.message
         
-        // forward event data to child contract
-        console.log("forwarding message: ", stateSenderEvent)
+        // forward event data to child contract      
         const childTx = await evmBridgeChild.processMessageFromRoot(0, wallet.address,stateSenderEvent)
-        console.log("getting receipt for forwarding")
         const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
 
         const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[0])).args.number

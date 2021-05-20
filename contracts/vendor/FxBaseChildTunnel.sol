@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.3;
 
-import "hardhat/console.sol";
-
 // IFxMessageProcessor represents interface to process message
 interface IFxMessageProcessor {
     function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) external;
@@ -39,7 +37,6 @@ abstract contract FxBaseChildTunnel is IFxMessageProcessor{
 
     function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) public override {
         require(msg.sender == fxChild, "FxBaseChildTunnel: INVALID_SENDER");
-        console.log("calling _process");
         _processMessageFromRoot(stateId, rootMessageSender, data);
     }
 

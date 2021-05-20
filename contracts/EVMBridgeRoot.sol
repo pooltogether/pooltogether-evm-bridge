@@ -4,11 +4,7 @@ pragma experimental ABIEncoderV2;
 
 import "./libraries/MultiSend.sol";
 
-// import { BaseRootTunnel } from "@maticnetwork/pos-portal/contracts/tunnel/BaseRootTunnel.sol";
-
-import { FxBaseRootTunnel } from "./FxBaseRootTunnel.sol";
-
-// import { ICheckpointManager } from "@maticnetwork/pos-portal/contracts/root/ICheckpointManager.sol";
+import { FxBaseRootTunnel } from "./vendor/FxBaseRootTunnel.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title EVMBridgeRoot lives on the parent chain (e.g. eth mainnet) and sends messages to a child chain

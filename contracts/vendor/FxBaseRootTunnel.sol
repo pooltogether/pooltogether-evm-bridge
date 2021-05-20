@@ -2,9 +2,9 @@
 pragma solidity 0.7.3;
 
 
-import {RLPReader} from "./libraries/RLPReader.sol";
-import {MerklePatriciaProof} from "./libraries/MerklePatriciaProof.sol";
-import {Merkle} from "./libraries/Merkle.sol";
+import {RLPReader} from "../libraries/RLPReader.sol";
+import {MerklePatriciaProof} from "../libraries/MerklePatriciaProof.sol";
+import {Merkle} from "../libraries/Merkle.sol";
 
 
 interface IFxStateSender {
