@@ -8,7 +8,6 @@ import { FxBaseRootTunnel } from "./vendor/FxBaseRootTunnel.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 /// @title EVMBridgeRoot lives on the parent chain (e.g. eth mainnet) and sends messages to a child chain
-/// @notice 
 contract  EVMBridgeRoot is Ownable, FxBaseRootTunnel {
 
     /// @notice Emitted when a message is sent to the child chain
