@@ -5,6 +5,8 @@ pragma experimental ABIEncoderV2;
 import "./libraries/MultiSend.sol";
 import { FxBaseChildTunnel } from "./vendor/FxBaseChildTunnel.sol";
 
+import "hardhat/console.sol";
+
 /// @title EVMBridgeChild lives on the child chain and executes messages sent from the parent chain
 contract EVMBridgeChild is FxBaseChildTunnel {
 
@@ -21,9 +23,14 @@ contract EVMBridgeChild is FxBaseChildTunnel {
     /// @param message Sent from parent chain
     function _processMessageFromRoot(uint256 stateId, address sender, bytes memory message) internal override {
         
-        (, , bytes memory data) = abi.decode(message, (address, address, bytes));
-        MultiSend.multiSend(data);
-        emit ReceivedMessagesFromRoot(stateId, sender, data);
+        console.log("EVMBridgeChild stateId: ", stateId);
+        console.log("EVMBridgeChild sender: ", sender);
+
+        //(, , bytes memory data) = abi.decode(message, (address, address, bytes));
+        console.log("using multisend with data length: ", message.length);
+        MultiSend.multiSend(message);
+        console.log("multicall completed");
+        emit ReceivedMessagesFromRoot(stateId, sender, message);
     }
 
 }

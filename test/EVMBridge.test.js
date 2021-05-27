@@ -5,7 +5,7 @@ describe('EVM Bridge Sender', function() {
     
     let wallet, wallet2, wallet3, wallet4
 
-    let evmBridgeRoot, evmBridgeChild, testContract, mockStateSync, fxRoot
+    let evmBridgeRoot, evmBridgeChild, testContract, mockStateSync, fxRoot, fxChild
 
     beforeEach(async () => {
         [wallet, wallet2, wallet3, wallet4] = await hre.ethers.getSigners();
@@ -15,13 +15,32 @@ describe('EVM Bridge Sender', function() {
 
         const fxRootFactory = await ethers.getContractFactory("FxRoot")
         fxRoot = await fxRootFactory.deploy(mockStateSync.address)
+        
+        
+        console.log("deployed FxRoot at ", fxRoot.address)
+
+        const fxChildFactory = await ethers.getContractFactory("FxChild")
+        fxChild = await fxChildFactory.deploy()
+        
+        console.log("deployed FxChild at ", fxChild.address)
+
+
+        console.log("setting FxRoot as ", fxRoot.address)
+        await fxChild.setFxRoot(fxRoot.address)
+        console.log("setting FxChild as ", fxChild.address)
+        await fxRoot.setFxChild(fxChild.address)
 
 
         const bridgeRootFactory = await ethers.getContractFactory("EVMBridgeRoot", wallet)
         evmBridgeRoot = await bridgeRootFactory.deploy(wallet.address, wallet2.address, fxRoot.address) //address _owner, address _checkpointManager, address _fxRoot
         
+
+
         const bridgeChildFactory = await ethers.getContractFactory("EVMBridgeChildHarness")
-        evmBridgeChild= await bridgeChildFactory.deploy(wallet.address)
+        evmBridgeChild= await bridgeChildFactory.deploy(fxChild.address)  // _fxChild
+
+        await evmBridgeRoot.setFxChildTunnel(evmBridgeChild.address)
+
 
         const testContractFactory = await ethers.getContractFactory("TestContract")
         testContract = await testContractFactory.deploy()
@@ -37,7 +56,7 @@ describe('EVM Bridge Sender', function() {
     })
 
 
-    it('Send number Message to Child', async () => {
+    it.only('Send number Message to Child', async () => {
 
         const setNumberValue = 40
         // craft tx -- call testContract::setNumber()
@@ -53,14 +72,28 @@ describe('EVM Bridge Sender', function() {
         
         // listen to Mock::stateSync and get event
         const receipt = await ethers.provider.getTransactionReceipt(tx.hash)
+
+        console.log(mockStateSync.interface.parseLog(receipt.logs[0]))
         
-        const stateSenderEvent = (mockStateSync.interface.parseLog(receipt.logs[0])).args.message
-        
+        const stateSenderEventData = (mockStateSync.interface.parseLog(receipt.logs[0])).args.data
+        const stateSenderEventId = (mockStateSync.interface.parseLog(receipt.logs[0])).args.id
+        const stateSenderEventReceiver = (mockStateSync.interface.parseLog(receipt.logs[0])).args.contractAddress // not used anywhere
+
+        console.log("stateSenderEventData ", stateSenderEventData)
+        // console.log("id", stateSenderEventId)
+        // console.log("stateSenderEventReceiver",stateSenderEventReceiver)
+
+        console.log("calling onStateReceive on ", fxChild.address)
+
+        // off-chain bridge picks up and forwards 
+        const childTx = await fxChild.onStateReceive(stateSenderEventId, stateSenderEventData) 
+
+        // console.log("getting childTx receipt")        
         // forward event data to child contract      
-        const childTx = await evmBridgeChild.processMessageFromRoot(0, wallet.address,stateSenderEvent)
+        // const childTx = await evmBridgeChild.processMessageFromRoot(stateSenderEventId, stateSenderEventReceiver, stateSenderEventData)
         const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
 
-        const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[0])).args.number
+        const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[1])).args.number
 
         expect(testContractEvent.toNumber()).to.equal(setNumberValue)
     })

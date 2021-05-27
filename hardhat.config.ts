@@ -1,6 +1,6 @@
 import '@nomiclabs/hardhat-etherscan';
 import '@nomiclabs/hardhat-waffle';
-import 'hardhat-abi-exporter';
+// import 'hardhat-abi-exporter';
 import 'hardhat-deploy';
 import 'hardhat-deploy-ethers';
 import 'hardhat-gas-reporter';
@@ -14,11 +14,11 @@ import networks from './hardhat.network';
 const optimizerEnabled = !process.env.OPTIMIZER_DISABLED;
 
 const config: HardhatUserConfig = {
-  abiExporter: {
-    path: './abis',
-    clear: true,
-    flat: true,
-  },
+  // abiExporter: {
+  //   path: './abis',
+  //   clear: true,
+  //   flat: true,
+  // },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
