@@ -95,7 +95,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   // deploying EVMBridgeChild to mumbai or matic
   if(chainId == 80001 || chainId == 137){
     cyan(`\nDeploying EVMBridgeChild...`);
-    const EVMBridgeChild = await deploy('EVMBridgeChild', {
+    const EVMBridgeChild = await deploy('PoolTogetherEVMBridgeChild', {
       from: deployer,
       args: [fxChild]
     });
@@ -106,7 +106,7 @@ const deployFunction: any = async function (hre: HardhatRuntimeEnvironment) {
   // to EVMBridgeRoot to goerli or mainnet
   if(chainId == 5 || chainId == 1){
     cyan(`\nDeploying EVMBridgeRoot...`);
-    const EVMBridgeRoot = await deploy('EVMBridgeRoot', {
+    const EVMBridgeRoot = await deploy('PoolTogetherEVMBridgeRoot', {
       from: deployer,
       args: [deployer, checkpointManager, fxRoot]
     });
