@@ -2,11 +2,11 @@
 pragma solidity >=0.4.24 <0.8.0;
 pragma experimental ABIEncoderV2;
 
-import "../EVMBridgeChild.sol";
+import "../PoolTogetherEVMBridgeChild.sol";
 
-contract EVMBridgeChildHarness is EVMBridgeChild {
+contract PoolTogetherEVMBridgeChildHarness is PoolTogetherEVMBridgeChild {
 
-    constructor(address _fxChild) EVMBridgeChild(_fxChild){
+    constructor(address _fxChild) PoolTogetherEVMBridgeChild(_fxChild){
 
     }
 

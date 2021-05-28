@@ -1,12 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.3;
-pragma experimental ABIEncoderV2;
 
 import "./libraries/MultiSend.sol";
 import { FxBaseChildTunnel } from "./vendor/FxBaseChildTunnel.sol";
 
-/// @title EVMBridgeChild lives on the child chain and executes messages sent from the parent chain
-contract EVMBridgeChild is FxBaseChildTunnel {
+/// @title PoolTogetherEVMBridgeChild lives on the child chain and executes messages sent from the parent chain
+contract PoolTogetherEVMBridgeChild is FxBaseChildTunnel {
 
     constructor(address _fxChild) public FxBaseChildTunnel(_fxChild) {
 
@@ -21,9 +20,8 @@ contract EVMBridgeChild is FxBaseChildTunnel {
     /// @param message Sent from parent chain
     function _processMessageFromRoot(uint256 stateId, address sender, bytes memory message) internal override {
         
-        (, , bytes memory data) = abi.decode(message, (address, address, bytes));
-        MultiSend.multiSend(data);
-        emit ReceivedMessagesFromRoot(stateId, sender, data);
+        MultiSend.multiSend(message);
+        emit ReceivedMessagesFromRoot(stateId, sender, message);
     }
 
 }

@@ -3,11 +3,18 @@ pragma solidity >=0.4.24 <0.8.0;
 
 contract MockStateSync{
 
-    event SentState(bytes message);
+    uint256 public counter;
 
-    function syncState(address childTunnel, bytes calldata message) external{
-        
-        emit SentState(message);
+    event StateSynced(
+        uint256 indexed id,
+        address indexed contractAddress,
+        bytes data
+    );
+
+    function syncState(address receiver, bytes calldata data)
+        external
+    {
+        counter = counter + 1;
+        emit StateSynced(counter, receiver, data);
     }
-
 }

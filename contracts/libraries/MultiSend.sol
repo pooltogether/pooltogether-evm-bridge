@@ -4,7 +4,7 @@ pragma solidity 0.7.3;
 
 library MultiSend{
 
-    // credit: gnosis-safe devs
+    /// credit: gnosis-safe devs (https://github.com/gnosis/safe-contracts/blob/186a21a74b327f17fc41217a927dea7064f74604/contracts/libraries/MultiSend.sol)
     /// @dev Sends multiple transactions and reverts all if one fails.
     /// @param transactions Encoded transactions. Each transaction is encoded as a packed bytes of
     ///                     operation as a uint8 with 0 for a call or 1 for a delegatecall (=> 1 byte),
@@ -16,7 +16,7 @@ library MultiSend{
     /// @notice This method is payable as delegatecalls keep the msg.value from the previous call
     ///         If the calling method (e.g. execTransaction) received ETH this would revert otherwise
     function multiSend(bytes memory transactions) internal {
-        // require(address(this) != multisendSingleton, "MultiSend should only be called via delegatecall"); // we commented this out to create a library
+        // require(address(this) != multisendSingleton, "MultiSend should only be called via delegatecall"); // commented this out to create a library
         // solhint-disable-next-line no-inline-assembly
         assembly {
             let length := mload(transactions)
