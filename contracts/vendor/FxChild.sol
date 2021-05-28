@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.3;
 
-import "hardhat/console.sol";
-
 // IStateReceiver represents interface to receive state
 interface IStateReceiver {
     function onStateReceive(uint256 stateId, bytes calldata data) external;
