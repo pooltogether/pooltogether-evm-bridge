@@ -11,13 +11,10 @@ contract MockStateSync{
         bytes data
     );
 
-
     function syncState(address receiver, bytes calldata data)
         external
     {
         counter = counter + 1;
         emit StateSynced(counter, receiver, data);
     }
-
-
 }

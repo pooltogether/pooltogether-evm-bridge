@@ -27,7 +27,8 @@ contract  PoolTogetherEVMBridgeRoot is Ownable, FxBaseRootTunnel {
     /// @param _fxRoot Address of the fxRoot for the chain
     constructor(address _owner, address _checkpointManager, address _fxRoot) public 
         Ownable() 
-        FxBaseRootTunnel(_checkpointManager, _fxRoot) {
+        FxBaseRootTunnel(_checkpointManager, _fxRoot) 
+    {
         
         transferOwnership(_owner);
     }

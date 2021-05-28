@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.7.3;
-pragma experimental ABIEncoderV2;
 
 import "./libraries/MultiSend.sol";
 import { FxBaseChildTunnel } from "./vendor/FxBaseChildTunnel.sol";
