@@ -40,12 +40,21 @@ Install the repo and dependencies by running:
 These contracts can be deployed to a network by running:
 `yarn deploy <networkName>`
 
-The EVMBridgeRoot contract should be deployed on the "parent" chain - `yarn deploy mainnet`
-The EVMBridgeChild contract should be deployed on the "child" chain - `yarn deploy matic`
+The `PoolTogetherEVMBridgeRoot` contract should be deployed on the "parent" chain - `yarn deploy mainnet`
+The `PoolTogetherEVMBridgeChild` contract should be deployed on the "child" chain - `yarn deploy matic`
 
 # Testing
 Run the unit tests locally with:
 `yarn test`
+
+## Integration Test Steps
+
+1. Deploy to both Root (e.g. Goerli) and Child testnets (e.g. Mumbai) and verify on Root Chain 
+1. Set `fxChildTunnel` address on `PoolTogetherEVMBridgeRoot` - use goerli.etherscan.io
+1. Set `fxRootTunnel` address on `PoolTogetherEVMBridgeChild` - use `hardhat run ./scripts/setTunnels --network mumbai`
+1. Deploy the `TestContract` to the Child Network
+1. Format `setNumber()` or `setString()` transaction targeting `TestContract` and send from address owner of `PoolTogetherEVMBridgeRoot` in Message Format
+1. Observe logs on `TestContract` - should update within a period of time to values set
 
 ## Coverage
 Generate the test coverage report with:
