@@ -10,11 +10,11 @@ async function sendTransactionViaBridge(){
 
     const testContract = await hre.ethers.getContractAt("TestContract","0x358a1EF6813D44f11a92968F6E47f5613004c33f") // address of testContract above
 
-    const encodedTxData1 = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[909])
+    const encodedTxData1 = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[7])
 
-    const encodedTxData2 = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setString(string)"),["working"])
+    // const encodedTxData2 = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setString(string)"),["working"])
     console.log("encodedTxData: ", encodedTxData1)
-    console.log("encodedTxData2: ", encodedTxData2)
+    // console.log("encodedTxData2: ", encodedTxData2)
     
     // const evmBridgeRootContract = await hre.ethers.getContractAt("EVMBridgeRoot", evmBridgeRoot, deployerSigner)
 
