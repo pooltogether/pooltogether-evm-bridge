@@ -11,6 +11,8 @@ interface IFxMessageProcessor {
     function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) external;
 }
 
+import "hardhat/console.sol";
+
 /**
  * @title FxChild child contract for state receiver
  */
@@ -25,7 +27,8 @@ contract FxChild is IStateReceiver {
     }
 
     function onStateReceive(uint256 stateId, bytes calldata _data) external override {
-        // require(msg.sender == address(0x0000000000000000000000000000000000001001), "Invalid sender"); // this is commented out for testing -- USE unchecked signer
+        console.log("msg.sender is ", msg.sender);
+        require(msg.sender == address(0x0000000000000000000000000000000000001001), "Invalid sender");
         (address rootMessageSender, address receiver, bytes memory data) = abi.decode(_data, (address, address, bytes));
         emit NewFxMessage(rootMessageSender, receiver, data);
         IFxMessageProcessor(receiver).processMessageFromRoot(stateId, rootMessageSender, data);

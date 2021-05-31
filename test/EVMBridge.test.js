@@ -16,8 +16,23 @@ describe('EVM Bridge Sender', function() {
         const fxRootFactory = await ethers.getContractFactory("FxRoot")
         fxRoot = await fxRootFactory.deploy(mockStateSync.address)
         
+        const wmaticAddressSigner = await ethers.provider.getUncheckedSigner("0x0000000000000000000000000000000000001001")
+        await hre.ethers.provider.send("hardhat_impersonateAccount", [wmaticAddressSigner._address])
+        
+        await wallet.sendTransaction({ to: wmaticAddressSigner._address, value: ethers.utils.parseEther('10') })
+        // console.log(wmaticAddress)
+
         const fxChildFactory = await ethers.getContractFactory("FxChild")
-        fxChild = await fxChildFactory.deploy()
+
+
+        const fxChildWMaticSigner = await fxChildFactory.connect(wmaticAddressSigner)
+        console.log("signer address ", fxChildWMaticSigner.signer._address)
+        
+        fxChild = await fxChildWMaticSigner.deploy() // failing here
+
+        console.log("fxChild deployed at ", fxChild.address)
+
+    
         
 
         await fxChild.setFxRoot(fxRoot.address)
@@ -78,7 +93,7 @@ describe('EVM Bridge Sender', function() {
         expect(testContractEvent.toNumber()).to.equal(setNumberValue)
     })
 
-    it('Send string Message to Child', async () => {
+    it.only('Send string Message to Child', async () => {
 
         const setStringValue = "0xhello"
         // craft tx -- call testContract::setNumber()
