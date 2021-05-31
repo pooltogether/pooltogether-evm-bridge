@@ -30,6 +30,7 @@ describe('EVM Bridge Sender', function() {
         evmBridgeChild= await bridgeChildFactory.deploy(fxChild.address)  // _fxChild
 
         await evmBridgeRoot.setFxChildTunnel(evmBridgeChild.address)
+        await evmBridgeChild.setFxRootTunnel(evmBridgeRoot.address)
 
 
         const testContractFactory = await ethers.getContractFactory("TestContract")
