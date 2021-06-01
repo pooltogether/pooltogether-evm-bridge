@@ -5,7 +5,7 @@ describe('EVM Bridge Sender', function() {
     
     let wallet, wallet2, wallet3, wallet4
 
-    let evmBridgeRoot, evmBridgeChild, testContract, mockStateSync, fxRoot, fxChild
+    let evmBridgeRoot, evmBridgeChild, testContract, mockStateSync, fxRoot, fxChild, wmaticAddressSigner
 
     beforeEach(async () => {
         [wallet, wallet2, wallet3, wallet4] = await hre.ethers.getSigners();
@@ -16,10 +16,14 @@ describe('EVM Bridge Sender', function() {
         const fxRootFactory = await ethers.getContractFactory("FxRoot")
         fxRoot = await fxRootFactory.deploy(mockStateSync.address)
         
-        const fxChildFactory = await ethers.getContractFactory("FxChild")
-        fxChild = await fxChildFactory.deploy()
+        wmaticAddressSigner = await ethers.provider.getUncheckedSigner("0x0000000000000000000000000000000000001001")
+        await hre.ethers.provider.send("hardhat_impersonateAccount", [wmaticAddressSigner._address])
         
-
+        await wallet.sendTransaction({ to: wmaticAddressSigner._address, value: ethers.utils.parseEther('10') })
+        
+        const fxChildFactory = await ethers.getContractFactory("FxChild")
+        
+        fxChild = await fxChildFactory.deploy()
         await fxChild.setFxRoot(fxRoot.address)
         await fxRoot.setFxChild(fxChild.address)
 
@@ -30,6 +34,7 @@ describe('EVM Bridge Sender', function() {
         evmBridgeChild= await bridgeChildFactory.deploy(fxChild.address)  // _fxChild
 
         await evmBridgeRoot.setFxChildTunnel(evmBridgeChild.address)
+        await evmBridgeChild.setFxRootTunnel(evmBridgeRoot.address)
 
 
         const testContractFactory = await ethers.getContractFactory("TestContract")
@@ -46,7 +51,7 @@ describe('EVM Bridge Sender', function() {
     })
 
 
-    it('Send number Message to Child', async () => {
+    it.only('Send number Message to Child', async () => {
 
         const setNumberValue = 40
         // craft tx -- call testContract::setNumber()
@@ -67,7 +72,7 @@ describe('EVM Bridge Sender', function() {
         const stateSenderEventId = (mockStateSync.interface.parseLog(receipt.logs[0])).args.id
 
         // off-chain bridge picks up and forwards 
-        const childTx = await fxChild.onStateReceive(stateSenderEventId, stateSenderEventData) 
+        const childTx = await fxChild.connect(wmaticAddressSigner).onStateReceive(stateSenderEventId, stateSenderEventData) 
  
         // forward event data to child contract      
         const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
@@ -98,7 +103,7 @@ describe('EVM Bridge Sender', function() {
         const stateSenderEventId = (mockStateSync.interface.parseLog(receipt.logs[0])).args.id
         
         // forward event data to child contract
-        const childTx = await fxChild.onStateReceive(stateSenderEventId, stateSenderEventData) 
+        const childTx = await fxChild.connect(wmaticAddressSigner).onStateReceive(stateSenderEventId, stateSenderEventData) 
         const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
 
         const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[1])).args._string
@@ -137,7 +142,7 @@ describe('EVM Bridge Sender', function() {
         const stateSenderEventId = (mockStateSync.interface.parseLog(txReceipt.logs[0])).args.id
         
         // forward event data to child contract
-        const childTx = await fxChild.onStateReceive(stateSenderEventId, stateSenderEventData) 
+        const childTx = await fxChild.connect(wmaticAddressSigner).onStateReceive(stateSenderEventId, stateSenderEventData) 
         const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
 
         const stringTestContractEvent = (testContract.interface.parseLog(childReceipt.logs[2])).args._string

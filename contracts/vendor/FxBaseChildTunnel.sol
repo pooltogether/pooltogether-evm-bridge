@@ -35,7 +35,7 @@ abstract contract FxBaseChildTunnel is IFxMessageProcessor{
         fxRootTunnel = _fxRootTunnel;
     }
 
-    function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) public override {
+    function processMessageFromRoot(uint256 stateId, address rootMessageSender, bytes calldata data) validateSender(rootMessageSender) public override {
         require(msg.sender == fxChild, "FxBaseChildTunnel: INVALID_SENDER");
         _processMessageFromRoot(stateId, rootMessageSender, data);
     }

@@ -25,8 +25,8 @@ async function setRootTunnelFx(){
     const deployerSigner = await hre.ethers.provider.getSigner(deployer)
 
    
-    const root = "0xfe6c5Ae087366A7119f12946d07E04C94BB7A048"
-    const evmBridgeChildContract = await hre.ethers.getContractAt("PoolTogetherEVMBridgeChild", "0x3fBCb09Ee774F7e32Ba4D60d1E2D4CB9CE703984")
+    const root = "0x829B1b38aABB4CaE17C00a39b499bA9F9758D9Fd"
+    const evmBridgeChildContract = await hre.ethers.getContractAt("PoolTogetherEVMBridgeChild", "0xe89f13fD3e5f13f49B6C4c48ae7104A01f2E70cF")
     await evmBridgeChildContract.setFxRootTunnel(root)
 
     console.log("done!")

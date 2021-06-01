@@ -16,7 +16,6 @@ library MultiSend{
     /// @notice This method is payable as delegatecalls keep the msg.value from the previous call
     ///         If the calling method (e.g. execTransaction) received ETH this would revert otherwise
     function multiSend(bytes memory transactions) internal {
-        // require(address(this) != multisendSingleton, "MultiSend should only be called via delegatecall"); // commented this out to create a library
         // solhint-disable-next-line no-inline-assembly
         assembly {
             let length := mload(transactions)
