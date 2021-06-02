@@ -50,13 +50,16 @@ describe('EVM Bridge Sender', function() {
         ]])).to.be.reverted
     })
 
+    it('Cannot externally call multiSendExt', async () => {
+        await expect(evmBridgeChild.connect(wmaticAddressSigner).multiSend("0x")).to.be.revertedWith("Not authorized")
+    })
 
-    it.only('Send number Message to Child', async () => {
+
+    it('Send number Message to Child', async () => {
 
         const setNumberValue = 40
         // craft tx -- call testContract::setNumber()
         const encodedTxData = testContract.interface.encodeFunctionData(testContract.interface.getFunction("setNumber(uint256)"),[setNumberValue])
-
         // send transaction from root to child
         const tx = await evmBridgeRoot.execute([[
             0, // callType
@@ -76,7 +79,7 @@ describe('EVM Bridge Sender', function() {
  
         // forward event data to child contract      
         const childReceipt = await ethers.provider.getTransactionReceipt(childTx.hash)
-
+    
         const testContractEvent = (testContract.interface.parseLog(childReceipt.logs[1])).args.number
 
         expect(testContractEvent.toNumber()).to.equal(setNumberValue)
