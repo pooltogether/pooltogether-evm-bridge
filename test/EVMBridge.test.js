@@ -51,7 +51,7 @@ describe('EVM Bridge Sender', function() {
     })
 
     it('Cannot externally call multiSendExt', async () => {
-        await expect(evmBridgeChild.connect(wmaticAddressSigner).multiSend("0x")).to.be.revertedWith("Not authorized")
+        await expect(evmBridgeChild.connect(wmaticAddressSigner).multiSend("0x")).to.be.revertedWith("PoolTogetherEVMBridgeChild:: Not authorized")
     })
 
 
@@ -154,5 +154,31 @@ describe('EVM Bridge Sender', function() {
 
         const numberTestContractEvent = (testContract.interface.parseLog(childReceipt.logs[1])).args.number
         expect(numberTestContractEvent.toNumber()).to.equal(setNumberValue)
+    })
+
+    it('Send not correctly encoded Message to Child', async () => {
+        // this test calls a function that does not exist on the test contract
+
+        const setNumberValue = 2
+    
+        const testContract2Factory = await ethers.getContractFactory("TestContract2")
+        let testContract2 = await testContract2Factory.deploy()
+
+        const encodedTxData = testContract2.interface.encodeFunctionData(testContract2.interface.getFunction("setUint8(uint8)"),[setNumberValue])  
+
+        // send transaction from root to child
+        const tx = await evmBridgeRoot.execute([[
+            0, // callType
+            testContract.address,
+            0, // value
+            encodedTxData
+        ]])
+        
+        const receipt = await ethers.provider.getTransactionReceipt(tx.hash)
+        
+        const stateSenderEventData = (mockStateSync.interface.parseLog(receipt.logs[0])).args.data
+        const stateSenderEventId = (mockStateSync.interface.parseLog(receipt.logs[0])).args.id
+
+        await expect(fxChild.connect(wmaticAddressSigner).onStateReceive(stateSenderEventId, stateSenderEventData)).to.emit(evmBridgeChild, "MessagesFromRootFailed")
     })
 })
