@@ -1,7 +1,7 @@
 {
-  "name": "@pooltogether/pooltogether-proxy-factory",
-  "version": "1.0.0-beta.3",
-  "description": "PoolTogether ProxyFactory Deployer",
+  "name": "@pooltogether/pooltogether-evm-bridge",
+  "version": "1.0.0",
+  "description": "PoolTogether EVM Bridge -> Matic",
   "main": "index.js",
   "license": "GPL-3.0",
   "scripts": {
